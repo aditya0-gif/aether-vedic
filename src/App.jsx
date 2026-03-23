@@ -9,18 +9,23 @@ export default function App() {
   const [loading, setLoading] = useState(false);
 
   const getHoroscope = async () => {
-    if (!sign) return alert("Enter zodiac sign");
+    if (!sign) return alert("Select zodiac sign");
 
     setLoading(true);
     setResult("");
 
     try {
       const res = await fetch(
-        `https://api.api-ninjas.com/v1/horoscope?zodiac=${sign.toLowerCase()}`,
+        "https://api.api-ninjas.com/v1/horoscope",
         {
+          method: "POST",
           headers: {
-            "X-Api-Key": "jb6oXGK4BFYQ32kMeWlBY1czRFOLHRzMZCDqYGIn"
-          }
+            "X-Api-Key": "jb6oXGK4BFYQ32kMeWlBY1czRFOLHRzMZCDqYGIn",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            zodiac: sign
+          })
         }
       );
 
@@ -33,10 +38,12 @@ export default function App() {
     setLoading(false);
   };
 
+  // 🔮 Horoscope Page
   if (page === "horoscope") {
     return (
       <div className="min-h-screen bg-black text-white p-6">
-        <button
+
+        <button 
           onClick={() => setPage("dashboard")}
           className="mb-4 bg-gray-700 px-4 py-2 rounded"
         >
@@ -45,34 +52,49 @@ export default function App() {
 
         <h1 className="text-2xl mb-6">🔮 Horoscope</h1>
 
-        <input
-          type="text"
-          placeholder="Enter zodiac sign (e.g. aries)"
+        {/* Dropdown */}
+        <select
           value={sign}
           onChange={(e) => setSign(e.target.value)}
           className="w-full p-3 rounded bg-white/10 mb-4"
-        />
+        >
+          <option value="">Select Zodiac</option>
+          <option value="aries">Aries</option>
+          <option value="taurus">Taurus</option>
+          <option value="gemini">Gemini</option>
+          <option value="cancer">Cancer</option>
+          <option value="leo">Leo</option>
+          <option value="virgo">Virgo</option>
+          <option value="libra">Libra</option>
+          <option value="scorpio">Scorpio</option>
+          <option value="sagittarius">Sagittarius</option>
+          <option value="capricorn">Capricorn</option>
+          <option value="aquarius">Aquarius</option>
+          <option value="pisces">Pisces</option>
+        </select>
 
-        <button
+        <button 
           onClick={getHoroscope}
           className="bg-purple-600 px-6 py-2 rounded"
         >
-          {loading ? "Loading..." : "Get Horoscope"}
+          {loading ? "🔮 Reading stars..." : "Get Horoscope"}
         </button>
 
         {result && (
-          <p className="mt-6 bg-white/10 p-4 rounded-xl">
+          <div className="mt-6 bg-gradient-to-br from-purple-700/20 to-blue-700/20 p-5 rounded-2xl border border-white/10 shadow-lg">
             {result}
-          </p>
+          </div>
         )}
+
       </div>
     );
   }
 
+  // 📊 Chart Page
   if (page === "chart") {
     return (
       <div className="min-h-screen bg-black text-white p-6">
-        <button
+        <button 
           onClick={() => setPage("dashboard")}
           className="mb-4 bg-gray-700 px-4 py-2 rounded"
         >
@@ -83,10 +105,11 @@ export default function App() {
     );
   }
 
+  // 💎 Premium Page
   if (page === "premium") {
     return (
       <div className="min-h-screen bg-black text-white p-6">
-        <button
+        <button 
           onClick={() => setPage("dashboard")}
           className="mb-4 bg-gray-700 px-4 py-2 rounded"
         >
@@ -97,40 +120,50 @@ export default function App() {
     );
   }
 
+  // 🚀 Dashboard
   if (started) {
     return (
       <div className="min-h-screen bg-black text-white p-6">
-        <h1 className="text-2xl font-bold mb-6">🚀 Dashboard</h1>
+
+        <h1 className="text-2xl font-bold mb-6">
+          🚀 Dashboard
+        </h1>
 
         <div className="grid gap-4">
-          <div
+
+          <div 
             onClick={() => setPage("horoscope")}
             className="bg-white/10 p-4 rounded-xl cursor-pointer hover:scale-105 transition"
           >
             🔮 Daily Horoscope
           </div>
 
-          <div
+          <div 
             onClick={() => setPage("chart")}
             className="bg-white/10 p-4 rounded-xl cursor-pointer hover:scale-105 transition"
           >
             📊 Birth Chart
           </div>
 
-          <div
+          <div 
             onClick={() => setPage("premium")}
             className="bg-white/10 p-4 rounded-xl cursor-pointer hover:scale-105 transition"
           >
             💎 Premium Predictions
           </div>
+
         </div>
+
       </div>
     );
   }
 
+  // 🏠 Home Page
   return (
     <div className="min-h-screen bg-gradient-to-br from-black to-blue-900 flex items-center justify-center">
+
       <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl text-center shadow-xl">
+
         <h1 className="text-3xl font-bold text-white mb-4">
           ✨ Aether Vedic
         </h1>
@@ -145,7 +178,9 @@ export default function App() {
         >
           Get Started
         </button>
+
       </div>
+
     </div>
   );
 }
