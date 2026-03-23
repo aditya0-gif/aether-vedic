@@ -1,3 +1,9 @@
 export default function DashboardPage() {
-  return <h1 style={{ color: 'white' }}>Dashboard 📊</h1>;
+  return (
+    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <h1 className="text-4xl font-bold">
+        Dashboard 🚀 (Coming Soon)
+      </h1>
+    </div>
+  );
 }
