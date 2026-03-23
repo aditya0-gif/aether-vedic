@@ -30,7 +30,10 @@ export default function App() {
       );
 
       const data = await res.json();
-      setResult(data.horoscope || "No data found");
+
+      // ✅ FIXED HERE
+      setResult(data.prediction || "No data found");
+
     } catch (err) {
       setResult("Error fetching horoscope");
     }
