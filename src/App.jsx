@@ -16,23 +16,12 @@ export default function App() {
 
     try {
       const res = await fetch(
-        "https://api.api-ninjas.com/v1/horoscope",
-        {
-          method: "POST",
-          headers: {
-            "X-Api-Key": "jb6oXGK4BFYQ32kMeWlBY1czRFOLHRzMZCDqYGIn",
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            zodiac: sign
-          })
-        }
+        `https://ohmanda.com/api/horoscope/${sign}`
       );
 
       const data = await res.json();
 
-      // ✅ FIXED HERE
-      setResult(data.horoscope || data.prediction || JSON.stringify(data));
+      setResult(data.horoscope);
 
     } catch (err) {
       setResult("Error fetching horoscope");
@@ -55,7 +44,6 @@ export default function App() {
 
         <h1 className="text-2xl mb-6">🔮 Horoscope</h1>
 
-        {/* Dropdown */}
         <select
           value={sign}
           onChange={(e) => setSign(e.target.value)}
@@ -161,7 +149,7 @@ export default function App() {
     );
   }
 
-  // 🏠 Home Page
+  // 🏠 Home
   return (
     <div className="min-h-screen bg-gradient-to-br from-black to-blue-900 flex items-center justify-center">
 
