@@ -32,7 +32,7 @@ export default function App() {
       const data = await res.json();
 
       // ✅ FIXED HERE
-      setResult(data.prediction || "No data found");
+      setResult(data.horoscope || data.prediction || JSON.stringify(data));
 
     } catch (err) {
       setResult("Error fetching horoscope");
