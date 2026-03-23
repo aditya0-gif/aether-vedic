@@ -6,28 +6,27 @@ export default function App() {
 
   const [sign, setSign] = useState("");
   const [result, setResult] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const getHoroscope = async () => {
+  // 🔮 Smart Horoscope Generator
+  const getHoroscope = () => {
     if (!sign) return alert("Select zodiac sign");
 
-    setLoading(true);
-    setResult("");
+    const messages = {
+      aries: "Today is a powerful day to take action. Trust your instincts and move forward boldly.",
+      taurus: "Stability and comfort will guide you today. Focus on what truly matters.",
+      gemini: "Communication is key today. Express your thoughts clearly and confidently.",
+      cancer: "Emotions may rise today. Take time to reflect and care for yourself.",
+      leo: "You will shine bright today. Confidence and leadership will bring success.",
+      virgo: "Focus on details today. Your precision will lead to great results.",
+      libra: "Balance is important today. Avoid extremes and stay centered.",
+      scorpio: "Deep thoughts may guide you. Trust your intuition.",
+      sagittarius: "Adventure calls you. Try something new today.",
+      capricorn: "Hard work will pay off. Stay disciplined.",
+      aquarius: "Creative ideas will flow. Think outside the box.",
+      pisces: "Follow your dreams today. Your imagination is strong."
+    };
 
-    try {
-      const res = await fetch(
-        `https://ohmanda.com/api/horoscope/${sign}`
-      );
-
-      const data = await res.json();
-
-      setResult(data.horoscope);
-
-    } catch (err) {
-      setResult("Error fetching horoscope");
-    }
-
-    setLoading(false);
+    setResult(messages[sign]);
   };
 
   // 🔮 Horoscope Page
@@ -68,7 +67,7 @@ export default function App() {
           onClick={getHoroscope}
           className="bg-purple-600 px-6 py-2 rounded"
         >
-          {loading ? "🔮 Reading stars..." : "Get Horoscope"}
+          Get Horoscope
         </button>
 
         {result && (
