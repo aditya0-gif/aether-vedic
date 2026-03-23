@@ -2,7 +2,54 @@ import { useState } from "react";
 
 export default function App() {
   const [started, setStarted] = useState(false);
+  const [page, setPage] = useState("dashboard");
 
+  // 🔮 Horoscope Page
+  if (page === "horoscope") {
+    return (
+      <div className="min-h-screen bg-black text-white p-6">
+        <button 
+          onClick={() => setPage("dashboard")}
+          className="mb-4 bg-gray-700 px-4 py-2 rounded"
+        >
+          ⬅ Back
+        </button>
+        <h1 className="text-2xl">🔮 Horoscope Page</h1>
+      </div>
+    );
+  }
+
+  // 📊 Chart Page
+  if (page === "chart") {
+    return (
+      <div className="min-h-screen bg-black text-white p-6">
+        <button 
+          onClick={() => setPage("dashboard")}
+          className="mb-4 bg-gray-700 px-4 py-2 rounded"
+        >
+          ⬅ Back
+        </button>
+        <h1 className="text-2xl">📊 Birth Chart Page</h1>
+      </div>
+    );
+  }
+
+  // 💎 Premium Page
+  if (page === "premium") {
+    return (
+      <div className="min-h-screen bg-black text-white p-6">
+        <button 
+          onClick={() => setPage("dashboard")}
+          className="mb-4 bg-gray-700 px-4 py-2 rounded"
+        >
+          ⬅ Back
+        </button>
+        <h1 className="text-2xl">💎 Premium Page</h1>
+      </div>
+    );
+  }
+
+  // 🚀 Dashboard
   if (started) {
     return (
       <div className="min-h-screen bg-black text-white p-6">
@@ -13,15 +60,24 @@ export default function App() {
 
         <div className="grid gap-4">
 
-          <div className="bg-white/10 p-4 rounded-xl">
+          <div 
+            onClick={() => setPage("horoscope")}
+            className="bg-white/10 p-4 rounded-xl cursor-pointer hover:scale-105 transition"
+          >
             🔮 Daily Horoscope
           </div>
 
-          <div className="bg-white/10 p-4 rounded-xl">
+          <div 
+            onClick={() => setPage("chart")}
+            className="bg-white/10 p-4 rounded-xl cursor-pointer hover:scale-105 transition"
+          >
             📊 Birth Chart
           </div>
 
-          <div className="bg-white/10 p-4 rounded-xl">
+          <div 
+            onClick={() => setPage("premium")}
+            className="bg-white/10 p-4 rounded-xl cursor-pointer hover:scale-105 transition"
+          >
             💎 Premium Predictions
           </div>
 
@@ -31,6 +87,7 @@ export default function App() {
     );
   }
 
+  // 🏠 Home Screen
   return (
     <div className="min-h-screen bg-gradient-to-br from-black to-blue-900 flex items-center justify-center">
 
