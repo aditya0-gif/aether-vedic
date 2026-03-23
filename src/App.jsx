@@ -1,4 +1,16 @@
+import { useState } from "react";
+
 export default function App() {
+  const [started, setStarted] = useState(false);
+
+  if (started) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black text-white text-2xl">
+        🚀 Welcome to Dashboard
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black to-blue-900 flex items-center justify-center">
 
@@ -13,7 +25,7 @@ export default function App() {
         </p>
 
         <button
-          onClick={() => alert("Welcome to Aether Vedic 🚀")}
+          onClick={() => setStarted(true)}
           className="bg-purple-600 hover:bg-purple-700 transition px-6 py-2 rounded-lg text-white"
         >
           Get Started
